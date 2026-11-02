@@ -70,7 +70,7 @@ const GROUPS: { title: string; subtitle?: string; fields: Field[] }[] = [
     ],
   },
   {
-    title: 'Naive app',
+    title: '“Same tip for all” app',
     fields: [
       { path: 'naive.updateEveryMin', label: 'Recommendation update every', unit: 'min', step: 1, min: 1 },
       { path: 'naive.followRate', label: 'App users who follow the tip', pct: true, step: 1, min: 0, max: 100 },

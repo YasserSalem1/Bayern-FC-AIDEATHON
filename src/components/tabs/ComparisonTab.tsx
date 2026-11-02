@@ -114,8 +114,8 @@ export function ComparisonTab() {
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <h2 className="text-xl font-bold text-slate-900">AI load balancer vs. no coordination</h2>
-        <p className="text-sm text-slate-500">Same fans, same seed, same match context. Headline numbers compare “AI load balancer” with “No coordination”.</p>
+        <h2 className="text-xl font-bold text-slate-900">AI exit waves vs. everyone at once</h2>
+        <p className="text-sm text-slate-500">Same fans, same seed, same match context. Headline numbers compare “AI exit waves” with “Everyone at once”.</p>
       </div>
       <div className="grid grid-cols-5 gap-4" data-pitch="headlines">
         <Headline label="Peak platform queue" value={signed(pctChange(a.peakU6Queue, b.peakU6Queue))} from={fmt(a.peakU6Queue)} to={fmt(b.peakU6Queue)} />
@@ -157,7 +157,7 @@ export function ComparisonTab() {
         <Card data-pitch="chart-shuttle">
           <CardHeader
             title="Shuttle queue over time – the herding effect"
-            subtitle="The naive app sends everyone to the route that looks fastest, which overloads it"
+            subtitle="“Same tip for all” sends everyone to the route that looks fastest, which overloads it"
           />
           <div className="px-2 pb-3">
             <TimeChart rows={rows.shuttle} unit="people" />
@@ -179,7 +179,7 @@ export function ComparisonTab() {
         <Card className="p-5" data-pitch="naive-callout">
           <div className="text-xs font-semibold tracking-wide text-amber-700 uppercase">Why coordination matters</div>
           <p className="mt-2 text-sm leading-relaxed text-slate-700">
-            At the whistle the naive app sees an empty bus stop and tells every app user <b>“take the shuttle”</b>.{' '}
+            At the whistle the “same tip for all” app sees an empty bus stop and tells every app user <b>“take the shuttle”</b>.{' '}
             <b className="tabular-nums">{fmt(naiveShuttle.users)}</b> fans follow – the shuttle becomes the <b>slowest</b> route:
           </p>
           <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
@@ -195,7 +195,7 @@ export function ComparisonTab() {
             </div>
           </div>
           <p className="mt-3 text-xs text-slate-500">
-            Worst wait with the naive app: <b className="tabular-nums">{fmt(naive.worstWait)} min</b>; {fmt(naive.notHome)} fans still not home after{' '}
+            Worst wait with “same tip for all”: <b className="tabular-nums">{fmt(naive.worstWait)} min</b>; {fmt(naive.notHome)} fans still not home after{' '}
             {config.horizonMin / 60} h.
           </p>
         </Card>

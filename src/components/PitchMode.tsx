@@ -30,23 +30,23 @@ const STEPS: PitchStep[] = [
       )} people, and the station approach is above safe density for ${r.none.summary.minutesAboveSafe} minutes.`,
   },
   {
-    title: '2 · A naive app makes it worse',
+    title: '2 · Same tip for all makes it worse',
     target: 'chart-shuttle',
     tab: 'comparison',
     caption: (r) =>
-      `A simple "fastest route" app sees an empty bus stop and sends every user there. ${fmt(r.naive.summary.routeStats.shuttle.users)} fans herd to the shuttle – it becomes the slowest route (${fmt(
+      `An app that gives everyone the same "fastest route" tip sees an empty bus stop and sends every user there. ${fmt(r.naive.summary.routeStats.shuttle.users)} fans herd to the shuttle – it becomes the slowest route (${fmt(
         r.naive.summary.routeStats.shuttle.avgTimeToHome,
       )} min to home on average, worst wait ${fmt(r.naive.summary.worstWait)} min).`,
   },
   {
-    title: '3 · The AI load balancer',
+    title: '3 · AI exit waves',
     target: 'panel-right',
     tab: 'simulation',
     left: 'none',
     right: 'ai',
     play: { from: 0, speed: 20 },
     caption: (r) =>
-      `The optimizer gives every block an exit wave and route that keeps queues under capacity. Same fans, same seed: peak platform queue ${fmt(
+      `Instead, every block gets its own exit wave and route that keeps queues under capacity. Same fans, same seed: peak platform queue ${fmt(
         pctChange(r.none.summary.peakU6Queue, r.ai.summary.peakU6Queue),
       )}%, average wait ${fmt(pctChange(r.none.summary.avgWait, r.ai.summary.avgWait))}%, unsafe minutes ${r.none.summary.minutesAboveSafe} → ${r.ai.summary.minutesAboveSafe} – even though only ${fmt(
         r.ai.summary.compliance * 100,

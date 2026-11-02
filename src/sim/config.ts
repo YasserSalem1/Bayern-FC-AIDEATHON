@@ -39,9 +39,9 @@ export const ROUTE_LABEL: Record<RouteId, string> = {
 };
 
 export const SCENARIO_LABEL: Record<ScenarioId, string> = {
-  none: 'No coordination',
-  naive: 'Naive app',
-  ai: 'AI load balancer',
+  none: 'Everyone at once',
+  naive: 'Same tip for all',
+  ai: 'AI exit waves',
 };
 
 export interface SegmentParams {

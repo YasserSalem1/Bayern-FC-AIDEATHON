@@ -1,6 +1,6 @@
 # The Third Half
 
-**AI exit load balancer for the Allianz Arena** · pitch demo for the FC Bayern Fan AI-DEATION
+**AI exit waves for the Allianz Arena** · pitch demo for the FC Bayern Fan AI-DEATION
 *Mia san mia. Nur ned alle auf oamal.*
 
 At the final whistle 75,024 fans leave at once, and most of them head down the Esplanade to one U6 station, Fröttmaning. The Third Half works like a load balancer for that crowd. It gives every block an exit wave (a time slot) and a route, so that the station approach and the platform queue stay below capacity. Fans who wait earn rewards: FC Bayern store points, partner-café points or ticket-lottery entries. Google Gemini explains every decision and writes each fan's personal message.
@@ -52,11 +52,11 @@ This writes `src/data/gemini-cache.json`, which holds the 24 decisions plus answ
 | Tab | What it shows |
 |---|---|
 | **Simulation** | Top-down map of the real site, drawn from OpenStreetMap: the Allianz Arena outline, Esplanade on the garage roof, bridge and stairs into Fröttmaning, U-Bahn tracks and depot, Busparkplatz Mitte, Gästeparkhaus, A9/A99. Two scenarios run side by side (or as one large map) on one shared timeline: play/pause, 1×/5×/20×, scrub. Each dot is about 10 fans, coloured by density. Live counters sit under each map. |
-| **Comparison** | Headline deltas (AI vs. no coordination), plus platform queue, station-approach density with the safety line, the shuttle herding effect, fans home over time, and a full metrics table. |
+| **Comparison** | Headline deltas (AI exit waves vs. everyone at once), plus platform queue, station-approach density with the safety line, the shuttle herding effect, fans home over time, and a full metrics table. |
 | **AI Decisions** | The U6 capacity plan per 5-minute slot and all 24 blocks (segment mix, wave, route, incentive, planned vs. simulated acceptance). Click a block for its **decision trace**: inputs → optimizer output (incl. rejected slots) → Gemini's incentive and explanation (and any validator correction) → final fan message. |
 | **Fan App** | Phone mockup for a fan in a chosen block: personal message, countdown to the wave, "leave now vs. leave with my wave" (home time and minutes in the crowd), reward, and the **Ask the stadium** chat. Next to it is the exact state Gemini is given. |
-| **Settings** | Every parameter, with an *assumption* badge: match context, seed, U6, shuttles, car parks, naive app, optimizer, reward budget, segment acceptance and travel modes. |
-| **Pitch Mode** | Header button. Five guided steps (problem → naive app fails → AI load balancer → how Gemini decides → what the fan sees), each with a spotlight and a caption that uses the live numbers. Keys: ← → Esc. |
+| **Settings** | Every parameter, with an *assumption* badge: match context, seed, U6, shuttles, car parks, “same tip for all” app, optimizer, reward budget, segment acceptance and travel modes. |
+| **Pitch Mode** | Header button. Five guided steps (problem → same tip for all fails → AI exit waves → how Gemini decides → what the fan sees), each with a spotlight and a caption that uses the live numbers. Keys: ← → Esc. |
 
 The **Ask the stadium** chatbot is available on every tab (floating button) and inside the phone. It answers exit questions only from the current simulation state, and answers general matchday questions without inventing facts.
 
@@ -82,9 +82,9 @@ The model is agent-based (one agent = one fan) with 30-second steps over 240 min
 
 ### Three scenarios on identical seeds
 
-1. **No coordination:** everyone leaves on the natural curve by their usual route.
-2. **Naive app:** every 10 minutes the app tells all users the route that is *currently* fastest. At the whistle the bus stop is empty, so thousands are sent there and the shuttle becomes the slowest route.
-3. **AI load balancer:** the optimizer plans waves and routes, and acceptance decides who actually follows.
+1. **Everyone at once:** everyone leaves on the natural curve by their usual route.
+2. **Same tip for all:** every 10 minutes the app tells all users the route that is *currently* fastest. At the whistle the bus stop is empty, so thousands are sent there and the shuttle becomes the slowest route.
+3. **AI exit waves:** the optimizer plans waves and routes, and acceptance decides who actually follows.
 
 ### Optimizer (`src/sim/optimizer.ts`): greedy time-slot capacity allocation
 
