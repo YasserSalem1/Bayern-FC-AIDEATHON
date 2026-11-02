@@ -1,0 +1,207 @@
+{
+  "generatedAt": "2026-11-02T18:12:27.926Z",
+  "generatedBy": "rule-based-placeholder",
+  "model": "none",
+  "decisions": {
+    "3b3970ec": [
+      {
+        "blockId": "N1",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block N1 has priority #13. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 75–80 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Hi! Stay until 23:37, then go via the Esplanade to the U6 without the crush. You'll get 1 entry into the ticket lottery.",
+        "language": "en"
+      },
+      {
+        "blockId": "N2",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block N2 has priority #14. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 85–90 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Servus! Bleib noch bis 23:47 – dann über die Esplanade zur U6, ohne Gedränge. Dafür gibt's ein Los für die Ticket-Lotterie.",
+        "language": "de"
+      },
+      {
+        "blockId": "N3",
+        "incentive": "none",
+        "incentiveReason": "No reward is needed: this block leaves immediately or follows a fixed route.",
+        "decisionExplanation": "Block N3 is an away block. Its route is fixed (Esplanade Süd lane via Eingang Nord) and it leaves at the whistle; the optimizer books its load first and never re-routes it.",
+        "fanMessage": "Gästefans: Euer Weg führt über die Esplanade Süd zur U6. Bitte den Ordnern folgen – gute Heimreise!",
+        "language": "de"
+      },
+      {
+        "blockId": "N4",
+        "incentive": "none",
+        "incentiveReason": "No reward is needed: this block leaves immediately or follows a fixed route.",
+        "decisionExplanation": "Block N4 is an away block. Its route is fixed (Esplanade Süd lane via Eingang Nord) and it leaves at the whistle; the optimizer books its load first and never re-routes it.",
+        "fanMessage": "Gästefans: Euer Weg führt über die Esplanade Süd zur U6. Bitte den Ordnern folgen – gute Heimreise!",
+        "language": "de"
+      },
+      {
+        "blockId": "N5",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block N5 has priority #15. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 80–90 min wave by shuttle bus, where the queue stays under 300 people.",
+        "fanMessage": "Hi! Stay until 23:42, then go by shuttle bus without the crush. You'll get 1 entry into the ticket lottery.",
+        "language": "en"
+      },
+      {
+        "blockId": "N6",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block N6 has priority #12. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 80–85 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Hi! Stay until 23:42, then go via the Esplanade to the U6 without the crush. You'll get 1 entry into the ticket lottery.",
+        "language": "en"
+      },
+      {
+        "blockId": "O1",
+        "incentive": "partner_cafe_points",
+        "incentiveReason": "Families and visitors value a seat, a warm drink and food while they wait.",
+        "decisionExplanation": "Block O1 has priority #5. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 45–55 min wave by shuttle bus, where the queue stays under 300 people.",
+        "fanMessage": "Servus! Bleib noch bis 23:07 – dann mit dem Shuttlebus, ohne Gedränge. Dafür gibt's 300 Punkte im Partner-Café.",
+        "language": "de"
+      },
+      {
+        "blockId": "O2",
+        "incentive": "none",
+        "incentiveReason": "No reward is needed: this block leaves immediately or follows a fixed route.",
+        "decisionExplanation": "Block O2 has priority #1. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 0–15 min wave by shuttle bus, where the queue stays under 300 people.",
+        "fanMessage": "Servus! Du kannst gleich los – nimm mit dem Shuttlebus. Gute Heimfahrt!",
+        "language": "de"
+      },
+      {
+        "blockId": "O3",
+        "incentive": "partner_cafe_points",
+        "incentiveReason": "Families and visitors value a seat, a warm drink and food while they wait.",
+        "decisionExplanation": "Block O3 has priority #3. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 25–35 min wave by shuttle bus, where the queue stays under 300 people.",
+        "fanMessage": "Servus! Bleib noch bis 22:47 – dann mit dem Shuttlebus, ohne Gedränge. Dafür gibt's 300 Punkte im Partner-Café.",
+        "language": "de"
+      },
+      {
+        "blockId": "O4",
+        "incentive": "partner_cafe_points",
+        "incentiveReason": "Families and visitors value a seat, a warm drink and food while they wait.",
+        "decisionExplanation": "Block O4 has priority #2. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 15–25 min wave by shuttle bus, where the queue stays under 300 people.",
+        "fanMessage": "Servus! Bleib noch bis 22:37 – dann mit dem Shuttlebus, ohne Gedränge. Dafür gibt's 300 Punkte im Partner-Café.",
+        "language": "de"
+      },
+      {
+        "blockId": "O5",
+        "incentive": "partner_cafe_points",
+        "incentiveReason": "Families and visitors value a seat, a warm drink and food while they wait.",
+        "decisionExplanation": "Block O5 has priority #6. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 55–65 min wave by shuttle bus, where the queue stays under 300 people.",
+        "fanMessage": "Servus! Bleib noch bis 23:17 – dann mit dem Shuttlebus, ohne Gedränge. Dafür gibt's 300 Punkte im Partner-Café.",
+        "language": "de"
+      },
+      {
+        "blockId": "O6",
+        "incentive": "partner_cafe_points",
+        "incentiveReason": "Families and visitors value a seat, a warm drink and food while they wait.",
+        "decisionExplanation": "Block O6 has priority #4. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 35–45 min wave by shuttle bus, where the queue stays under 300 people.",
+        "fanMessage": "Servus! Bleib noch bis 22:57 – dann mit dem Shuttlebus, ohne Gedränge. Dafür gibt's 300 Punkte im Partner-Café.",
+        "language": "de"
+      },
+      {
+        "blockId": "S1",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block S1 has priority #19. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 95–100 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Servus! Bleib noch bis 23:57 – dann über die Esplanade zur U6, ohne Gedränge. Dafür gibt's ein Los für die Ticket-Lotterie.",
+        "language": "de"
+      },
+      {
+        "blockId": "S2",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block S2 has priority #21. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 90–100 min wave by shuttle bus, where the queue stays under 300 people.",
+        "fanMessage": "Servus! Bleib noch bis 23:52 – dann mit dem Shuttlebus, ohne Gedränge. Dafür gibt's ein Los für die Ticket-Lotterie.",
+        "language": "de"
+      },
+      {
+        "blockId": "S3",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block S3 has priority #20. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 100–105 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Servus! Bleib noch bis 00:02 – dann über die Esplanade zur U6, ohne Gedränge. Dafür gibt's ein Los für die Ticket-Lotterie.",
+        "language": "de"
+      },
+      {
+        "blockId": "S4",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block S4 has priority #22. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 100–105 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Servus! Bleib noch bis 00:02 – dann über die Esplanade zur U6, ohne Gedränge. Dafür gibt's ein Los für die Ticket-Lotterie.",
+        "language": "de"
+      },
+      {
+        "blockId": "S5",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block S5 has priority #17. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 90–95 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Servus! Bleib noch bis 23:52 – dann über die Esplanade zur U6, ohne Gedränge. Dafür gibt's ein Los für die Ticket-Lotterie.",
+        "language": "de"
+      },
+      {
+        "blockId": "S6",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block S6 has priority #18. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 85–90 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Servus! Bleib noch bis 23:47 – dann über die Esplanade zur U6, ohne Gedränge. Dafür gibt's ein Los für die Ticket-Lotterie.",
+        "language": "de"
+      },
+      {
+        "blockId": "W1",
+        "incentive": "store_points",
+        "incentiveReason": "Store points work across all fan types and scale with the minutes waited.",
+        "decisionExplanation": "Block W1 has priority #8. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 75–80 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Hi! Stay until 23:37, then go via the Esplanade to the U6 without the crush. You'll get 750 FC Bayern store points.",
+        "language": "en"
+      },
+      {
+        "blockId": "W2",
+        "incentive": "partner_cafe_points",
+        "incentiveReason": "Families and visitors value a seat, a warm drink and food while they wait.",
+        "decisionExplanation": "Block W2 has priority #11. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 80–85 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Servus! Bleib noch bis 23:42 – dann über die Esplanade zur U6, ohne Gedränge. Dafür gibt's 300 Punkte im Partner-Café.",
+        "language": "de"
+      },
+      {
+        "blockId": "W3",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block W3 has priority #10. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 70–75 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Servus! Bleib noch bis 23:32 – dann über die Esplanade zur U6, ohne Gedränge. Dafür gibt's ein Los für die Ticket-Lotterie.",
+        "language": "de"
+      },
+      {
+        "blockId": "W4",
+        "incentive": "ticket_lottery_entry",
+        "incentiveReason": "Season-ticket holders and fan-club members value a chance at scarce tickets most.",
+        "decisionExplanation": "Block W4 has priority #16. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 90–95 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Hi! Stay until 23:52, then go via the Esplanade to the U6 without the crush. You'll get 1 entry into the ticket lottery.",
+        "language": "en"
+      },
+      {
+        "blockId": "W5",
+        "incentive": "store_points",
+        "incentiveReason": "Store points work across all fan types and scale with the minutes waited.",
+        "decisionExplanation": "Block W5 has priority #9. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 70–80 min wave by shuttle bus, where the queue stays under 300 people.",
+        "fanMessage": "Hi! Stay until 23:32, then go by shuttle bus without the crush. You'll get 700 FC Bayern store points.",
+        "language": "en"
+      },
+      {
+        "blockId": "W6",
+        "incentive": "partner_cafe_points",
+        "incentiveReason": "Families and visitors value a seat, a warm drink and food while they wait.",
+        "decisionExplanation": "Block W6 has priority #7. Earlier slots were already filled by fans who leave on their own, so the optimizer gave it the 70–75 min wave via the Esplanade to the U6, where the queue stays under 1500 people.",
+        "fanMessage": "Hi! Stay until 23:32, then go via the Esplanade to the U6 without the crush. You'll get 300 points at a partner café.",
+        "language": "en"
+      }
+    ]
+  },
+  "chat": {
+    "6e545a8c": "If you leave now: home around 23:41, with about 19 min standing in the queue (U6 queue right now: 0 people). If you leave with your wave at 22:37: home around 23:28, with about 0 min of queueing.",
+    "f94aae58": "Your block O4 is scheduled for 22:37–22:47 via Shuttle bus (Busparkplatz Mitte). Spreading blocks over waves keeps the Esplanade below 1.5 people/m² and the platform queue short. Right now density is 0.02 people/m².",
+    "452d9da3": "For leaving with your wave at 22:37 you get 300 points at a partner café.",
+    "5b08fc57": "Right now 0 people are queuing for the U6 (about 0 min wait). Esplanade density: 0.02 people/m² (safe limit 1.5). A train leaves every 2.5 min with up to 940 people."
+  }
+}
