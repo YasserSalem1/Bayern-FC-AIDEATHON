@@ -46,5 +46,5 @@ export function MapCanvas({ result, config, blockIds, awayIdx }: { result: Scena
       ro.disconnect();
     };
   }, [result, config, blockIds, awayIdx]);
-  return <canvas ref={ref} className="block aspect-[1000/620] w-full rounded-xl" />;
+  return <canvas ref={ref} className="block aspect-[1000/620] w-full" />;
 }

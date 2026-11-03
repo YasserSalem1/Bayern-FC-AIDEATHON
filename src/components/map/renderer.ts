@@ -41,7 +41,7 @@ export const COLORS = {
   green: '#16A34A',
   amber: '#F59E0B',
   red: '#DC052D',
-  seat: '#94A3B8',
+  seat: '#A1A1A6',
   egress: '#475569',
   car: '#64748B',
   train: '#1E3A8A',
@@ -308,7 +308,7 @@ function label(
 export function drawBackground(ctx: CanvasRenderingContext2D, _c: SimConfig, blockIds: string[], awayIdx: Set<number>) {
   const L = G.layers;
   const base = ctx.getTransform();
-  ctx.fillStyle = '#F4F5F2';
+  ctx.fillStyle = '#F3F2EE';
   ctx.fillRect(0, 0, W, H);
   applyView(ctx);
   ctx.lineCap = 'round';
@@ -333,43 +333,31 @@ export function drawBackground(ctx: CanvasRenderingContext2D, _c: SimConfig, blo
     ctx.setLineDash([]);
   };
 
-  fillAll(L.meadow, '#E6EFDC');
-  fillAll(L.wood, '#D5E5C8');
-  fillAll(L.parking, '#E8E9EC');
-  for (const k of ['busMitte', 'busSued', 'guestGarage'] as const) if (G.named[k]) fillAll([G.named[k]], '#E3E5EA');
-  fillAll([G.named.parkRide], '#E3E5EA');
+  fillAll(L.meadow, '#E7EFDF');
+  fillAll(L.wood, '#DCE9D3');
+  fillAll(L.parking, '#EBEAE5');
+  for (const k of ['busMitte', 'busSued', 'guestGarage'] as const) if (G.named[k]) fillAll([G.named[k]], '#E8E7E2');
+  fillAll([G.named.parkRide], '#E8E7E2');
 
   // Parking garage (four storeys under the Esplanade).
-  fillAll([GARAGE], '#E6E8EE');
-  ctx.save();
-  path(ctx, GARAGE, true);
-  ctx.clip();
-  ctx.strokeStyle = '#D6DAE2';
-  ctx.lineWidth = 1;
-  for (let x = GARAGE[0][0] - 300; x < GARAGE[1][0]; x += 9) {
-    path(ctx, [[x, GARAGE[0][1]], [x + 300, GARAGE[2][1]]]);
-    ctx.stroke();
-  }
-  ctx.restore();
+  fillAll([GARAGE], '#ECEBE6');
 
-  fillAll(L.motorwayArea, '#DADFE7');
-  strokeAll(L.motorway, '#C3CAD5', 7);
-  strokeAll(L.motorway, '#FFFFFF', 3.5);
-  strokeAll(L.road, '#CBD2DC', 5);
-  strokeAll(L.road, '#FFFFFF', 3);
-  strokeAll(L.service, '#E1E5EB', 1.6);
-  strokeAll(L.subway, '#A8AFBC', 1);
-  fillAll(L.building, '#DEE1E6');
-  strokeAll(L.footway, '#D3D8DF', 0.8, [2, 2]);
+  fillAll(L.motorwayArea, '#E6E4DF');
+  strokeAll(L.motorway, '#DAD7D0', 7);
+  strokeAll(L.motorway, '#FFFFFF', 4.5);
+  strokeAll(L.road, '#E0DED8', 5);
+  strokeAll(L.road, '#FFFFFF', 3.2);
+  strokeAll(L.service, '#E9E8E3', 1.2);
+  strokeAll(L.subway, '#CFCED2', 0.8);
+  fillAll(L.building, '#E5E4DF');
 
   // Esplanade surface on the garage roof.
-  ctx.strokeStyle = '#F8F7F4';
+  ctx.strokeStyle = '#FFFFFF';
   ctx.lineWidth = 64;
   path(ctx, ESPLANADE.slice(0, 8));
   ctx.stroke();
-  strokeAll(L.esplanade, '#E7E3DA', 1.2);
   ctx.lineWidth = 16;
-  ctx.strokeStyle = '#F8F7F4';
+  ctx.strokeStyle = '#FFFFFF';
   path(ctx, ESPLANADE.slice(7));
   ctx.stroke();
   // Away lane fence.
@@ -380,14 +368,18 @@ export function drawBackground(ctx: CanvasRenderingContext2D, _c: SimConfig, blo
   ctx.stroke();
   ctx.setLineDash([]);
 
-  fillAll(L.platform, '#CBD5E1');
+  fillAll(L.platform, '#D6D5D0');
 
   // Stadium: outer shell, three-tier bowl with 24 sectors, pitch.
   ctx.fillStyle = '#FFFFFF';
   path(ctx, STADIUM, true);
   ctx.fill();
-  ctx.strokeStyle = '#94A3B8';
-  ctx.lineWidth = 1.5;
+  ctx.shadowColor = 'rgba(0,0,0,0.12)';
+  ctx.shadowBlur = 10;
+  ctx.fill();
+  ctx.shadowBlur = 0;
+  ctx.strokeStyle = '#C7C7CC';
+  ctx.lineWidth = 1;
   ctx.stroke();
   for (let b = 0; b < blockIds.length; b++) {
     const pts: P[] = [];
@@ -402,10 +394,10 @@ export function drawBackground(ctx: CanvasRenderingContext2D, _c: SimConfig, blo
       pts.push([CENTER[0] + Math.cos(a) * r, CENTER[1] + Math.sin(a) * r]);
     }
     path(ctx, pts, true);
-    ctx.fillStyle = awayIdx.has(b) ? '#E0E7FF' : b % 2 ? '#EEF1F5' : '#E6EAF0';
+    ctx.fillStyle = awayIdx.has(b) ? '#E6E8FA' : b % 2 ? '#F4F4F6' : '#EDEDF0';
     ctx.fill();
   }
-  ctx.fillStyle = '#CFE8C8';
+  ctx.fillStyle = '#CDE6C2';
   ctx.fillRect(CENTER[0] - PITCH.hw, CENTER[1] - PITCH.hh, PITCH.hw * 2, PITCH.hh * 2);
   ctx.strokeStyle = '#FFFFFF';
   ctx.lineWidth = 0.8;
@@ -508,7 +500,7 @@ export function drawFrame(
   // Density tint on the station approach and away lane.
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
-  ctx.globalAlpha = 0.22;
+  ctx.globalAlpha = 0.16;
   ctx.strokeStyle = densityColor(dN, safe);
   ctx.lineWidth = 18;
   path(ctx, ESPLANADE.slice(6));
@@ -522,12 +514,7 @@ export function drawFrame(
   // Garage fill: people waiting to drive out.
   const carQ = sampleAt(s.carQueue, t);
   if (carQ > 0) {
-    ctx.globalAlpha = Math.min(0.16, 0.03 + (0.13 * carQ) / (c.car.vehicles * c.car.peoplePerCar * 0.6));
-    ctx.fillStyle = '#475569';
-    path(ctx, GARAGE, true);
-    ctx.fill();
-    ctx.globalAlpha = 1;
-    label(ctx, `${Math.round(carQ).toLocaleString('en-US')} cars queuing`, ...screenAt(GARAGE[1], 18, 47), 10, '#334155', 'left', 600);
+    label(ctx, `${Math.round(carQ).toLocaleString('en-US')} waiting to drive out`, ...screenAt(GARAGE[1], 18, 47), 10, '#334155', 'left', 600);
   }
 
   // Train at the platform, departing south towards the city.
@@ -677,9 +664,14 @@ export function drawFrame(
     }
   }
 
-  const size = 1.7;
+  const r = 1.1;
   for (const [col, pts] of buckets) {
     ctx.fillStyle = col;
-    for (let i = 0; i < pts.length; i += 2) ctx.fillRect(pts[i] - size / 2, pts[i + 1] - size / 2, size, size);
+    ctx.beginPath();
+    for (let i = 0; i < pts.length; i += 2) {
+      ctx.moveTo(pts[i] + r, pts[i + 1]);
+      ctx.arc(pts[i], pts[i + 1], r, 0, Math.PI * 2);
+    }
+    ctx.fill();
   }
 }

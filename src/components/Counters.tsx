@@ -10,7 +10,7 @@ export function Counters({ result, config }: { result: ScenarioResult; config: S
   const density = Math.max(s.densityNorth[m], s.densitySouth[m]);
   const unsafe = density > config.u6.safeDensity;
   return (
-    <div className="grid grid-cols-5 gap-4 px-1">
+    <div className="grid grid-cols-5 divide-x divide-black/[0.06] rounded-2xl bg-canvas py-3 [&>*]:px-4">
       <Stat label="In stadium" value={fmt(s.inStadium[m])} />
       <Stat label="U6 queue" value={fmt(s.u6Queue[m])} tone={s.u6Queue[m] > config.u6.platformCapacity ? 'bad' : 'neutral'} />
       <Stat label="Wait" value={`${fmt(s.u6ExpectedWait[m])} min`} />
