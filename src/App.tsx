@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { ChatWidget } from './components/ChatWidget';
 import { Header } from './components/Header';
-import { PitchMode } from './components/PitchMode';
 import { ComparisonTab } from './components/tabs/ComparisonTab';
 import { DecisionsTab } from './components/tabs/DecisionsTab';
 import { SettingsTab } from './components/tabs/SettingsTab';
@@ -53,7 +52,6 @@ export default function App() {
         <p className="mt-10 text-center text-[11px] text-ink-3">Simulation with assumed parameters for demonstration purposes · Map data © OpenStreetMap contributors</p>
       </main>
       <ChatWidget />
-      <PitchMode />
     </div>
   );
 }

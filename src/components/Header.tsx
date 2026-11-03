@@ -1,5 +1,5 @@
 import { useStore, type Tab } from '../store';
-import { Button, Segmented, Spinner } from './ui';
+import { Segmented, Spinner } from './ui';
 
 const TABS: { id: Tab; label: string }[] = [
   { id: 'simulation', label: 'Simulation' },
@@ -9,7 +9,7 @@ const TABS: { id: Tab; label: string }[] = [
 ];
 
 export function Header() {
-  const { phase, apiLive, lastGeminiSource, model, set, pitchStep, tab } = useStore();
+  const { phase, apiLive, lastGeminiSource, model, set, tab } = useStore();
   const live = apiLive && lastGeminiSource === 'live';
   return (
     <header className="sticky top-0 z-30 border-b border-black/5 bg-white/75 backdrop-blur-xl backdrop-saturate-150">
@@ -33,9 +33,6 @@ export function Header() {
             <span className={`h-1.5 w-1.5 rounded-full ${live ? 'bg-emerald-500' : 'bg-ink-3'}`} />
             Gemini: {live ? 'Live' : 'Cached'}
           </span>
-          <Button variant="primary" onClick={() => set({ pitchStep: pitchStep === null ? 0 : null })}>
-            {pitchStep === null ? 'Pitch Mode' : 'Exit'}
-          </Button>
         </div>
       </div>
     </header>
