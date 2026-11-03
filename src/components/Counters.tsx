@@ -10,17 +10,12 @@ export function Counters({ result, config }: { result: ScenarioResult; config: S
   const density = Math.max(s.densityNorth[m], s.densitySouth[m]);
   const unsafe = density > config.u6.safeDensity;
   return (
-    <div className="grid grid-cols-6 gap-3 px-1">
+    <div className="grid grid-cols-5 gap-4 px-1">
       <Stat label="In stadium" value={fmt(s.inStadium[m])} />
-      <Stat
-        label="On Esplanade"
-        value={fmt(s.walkwayNorth[m] + s.walkwaySouth[m])}
-        sub={<span className={unsafe ? 'font-semibold text-brand' : ''}>{density.toFixed(2)} p/m²{unsafe ? ' · unsafe' : ''}</span>}
-      />
-      <Stat label="U6 queue" value={fmt(s.u6Queue[m])} tone={s.u6Queue[m] > config.u6.platformCapacity ? 'bad' : 'neutral'} sub={`≈ ${fmt(s.u6ExpectedWait[m])} min wait`} />
-      <Stat label="Shuttle queue" value={fmt(s.shuttleQueue[m])} tone={s.shuttleExpectedWait[m] > 25 ? 'bad' : 'neutral'} sub={`≈ ${fmt(s.shuttleExpectedWait[m])} min wait`} />
-      <Stat label="Car-park queue" value={fmt(s.carQueue[m])} />
-      <Stat label="Home" value={fmt(s.home[m])} sub={`${fmt((s.home[m] / config.totalFans) * 100)}%`} tone="good" />
+      <Stat label="U6 queue" value={fmt(s.u6Queue[m])} tone={s.u6Queue[m] > config.u6.platformCapacity ? 'bad' : 'neutral'} />
+      <Stat label="Wait" value={`${fmt(s.u6ExpectedWait[m])} min`} />
+      <Stat label="Density" value={density.toFixed(1)} sub={unsafe ? 'unsafe' : 'p/m²'} tone={unsafe ? 'bad' : 'neutral'} />
+      <Stat label="Home" value={`${fmt((s.home[m] / config.totalFans) * 100)}%`} tone="good" />
     </div>
   );
 }

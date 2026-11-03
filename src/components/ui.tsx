@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 export function Card({ children, className = '', ...rest }: { children: ReactNode; className?: string; 'data-pitch'?: string }) {
   return (
-    <div className={`rounded-2xl border border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04),0_4px_16px_rgba(15,23,42,0.04)] ${className}`} {...rest}>
+    <div className={`rounded-[22px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.03),0_8px_28px_rgba(0,0,0,0.05)] ${className}`} {...rest}>
       {children}
     </div>
   );
@@ -10,10 +10,22 @@ export function Card({ children, className = '', ...rest }: { children: ReactNod
 
 export function CardHeader({ title, subtitle, right }: { title: ReactNode; subtitle?: ReactNode; right?: ReactNode }) {
   return (
-    <div className="flex items-start justify-between gap-4 px-5 pt-4 pb-2">
+    <div className="flex items-start justify-between gap-4 px-6 pt-5 pb-2">
       <div>
-        <h3 className="text-sm font-semibold text-slate-900">{title}</h3>
-        {subtitle && <p className="mt-0.5 text-xs text-slate-500">{subtitle}</p>}
+        <h3 className="text-[15px] font-semibold tracking-tight text-ink">{title}</h3>
+        {subtitle && <p className="mt-0.5 text-xs text-ink-3">{subtitle}</p>}
+      </div>
+      {right}
+    </div>
+  );
+}
+
+export function PageTitle({ title, subtitle, right }: { title: string; subtitle?: string; right?: ReactNode }) {
+  return (
+    <div className="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <h2 className="text-[32px] leading-tight font-semibold tracking-[-0.02em] text-ink">{title}</h2>
+        {subtitle && <p className="mt-1 text-[15px] text-ink-2">{subtitle}</p>}
       </div>
       {right}
     </div>
@@ -22,7 +34,7 @@ export function CardHeader({ title, subtitle, right }: { title: ReactNode; subti
 
 export function AssumptionBadge() {
   return (
-    <span className="rounded-full bg-amber-50 px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-amber-700 uppercase ring-1 ring-amber-200">
+    <span title="Assumption" className="rounded-full bg-amber-100/70 px-1.5 py-px text-[9px] font-semibold tracking-wide text-amber-700 uppercase">
       assumption
     </span>
   );
@@ -31,12 +43,12 @@ export function AssumptionBadge() {
 export function SourceBadge({ source }: { source?: 'live' | 'cached' | 'rule' }) {
   if (!source) return null;
   const map = {
-    live: ['Gemini · live', 'bg-emerald-50 text-emerald-700 ring-emerald-200'],
-    cached: ['Gemini · cached', 'bg-sky-50 text-sky-700 ring-sky-200'],
-    rule: ['Rule-based fallback', 'bg-slate-100 text-slate-600 ring-slate-200'],
+    live: ['Gemini', 'bg-emerald-50 text-emerald-700'],
+    cached: ['Gemini · cached', 'bg-sky-50 text-sky-700'],
+    rule: ['Offline', 'bg-fill text-ink-2'],
   } as const;
   const [text, cls] = map[source];
-  return <span className={`rounded-full px-2 py-0.5 text-[11px] font-medium ring-1 ${cls}`}>{text}</span>;
+  return <span className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${cls}`}>{text}</span>;
 }
 
 export function Button({
@@ -55,11 +67,11 @@ export function Button({
   title?: string;
 }) {
   const base =
-    'inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:opacity-50 disabled:cursor-not-allowed';
+    'inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-1.5 text-[13px] font-medium transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98]';
   const v = {
-    primary: 'bg-brand text-white hover:bg-brand-dark shadow-sm',
-    secondary: 'bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50',
-    ghost: 'text-slate-600 hover:bg-slate-100',
+    primary: 'bg-brand text-white hover:bg-brand-dark',
+    secondary: 'bg-fill text-ink hover:bg-[#dedee3]',
+    ghost: 'text-ink-2 hover:text-ink',
   }[variant];
   return (
     <button type="button" title={title} disabled={disabled} onClick={onClick} className={`${base} ${v} ${className}`}>
@@ -80,14 +92,14 @@ export function Segmented<T extends string | number>({
   size?: 'sm' | 'md';
 }) {
   return (
-    <div className="inline-flex rounded-lg bg-slate-100 p-0.5">
+    <div className="inline-flex rounded-full bg-fill p-0.5">
       {options.map((o) => (
         <button
           type="button"
           key={String(o.value)}
           onClick={() => onChange(o.value)}
-          className={`rounded-md font-medium transition-colors ${size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm'} ${
-            o.value === value ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'
+          className={`rounded-full font-medium whitespace-nowrap transition-all ${size === 'sm' ? 'px-2.5 py-0.5 text-xs' : 'px-3.5 py-1 text-[13px]'} ${
+            o.value === value ? 'bg-white text-ink shadow-[0_1px_3px_rgba(0,0,0,0.12)]' : 'text-ink-2 hover:text-ink'
           }`}
         >
           {o.label}
@@ -98,16 +110,16 @@ export function Segmented<T extends string | number>({
 }
 
 export function Stat({ label, value, sub, tone }: { label: string; value: ReactNode; sub?: ReactNode; tone?: 'good' | 'bad' | 'neutral' }) {
-  const toneCls = tone === 'bad' ? 'text-brand' : tone === 'good' ? 'text-emerald-700' : 'text-slate-900';
+  const toneCls = tone === 'bad' ? 'text-brand' : tone === 'good' ? 'text-emerald-600' : 'text-ink';
   return (
     <div className="min-w-0">
-      <div className="truncate text-[11px] font-medium tracking-wide text-slate-500 uppercase">{label}</div>
-      <div className={`text-lg font-semibold tabular-nums ${toneCls}`}>{value}</div>
-      {sub && <div className="text-[11px] text-slate-500">{sub}</div>}
+      <div className="truncate text-xs text-ink-3">{label}</div>
+      <div className={`text-[22px] leading-tight font-semibold tracking-tight tabular-nums ${toneCls}`}>{value}</div>
+      {sub && <div className="truncate text-[11px] text-ink-3">{sub}</div>}
     </div>
   );
 }
 
 export function Spinner() {
-  return <span className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-slate-300 border-t-brand" />;
+  return <span className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-fill border-t-brand" />;
 }

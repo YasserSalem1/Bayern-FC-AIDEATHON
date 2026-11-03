@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { ChatWidget } from './components/ChatWidget';
 import { Header } from './components/Header';
-import { Nav } from './components/Nav';
 import { PitchMode } from './components/PitchMode';
 import { ComparisonTab } from './components/tabs/ComparisonTab';
 import { DecisionsTab } from './components/tabs/DecisionsTab';
@@ -42,23 +41,19 @@ export default function App() {
   }, [init]);
   usePlayback();
   return (
-    <div className="flex h-full min-w-[1180px] flex-col">
+    <div className="min-h-full min-w-[1180px]">
       <Header />
-      <div className="flex min-h-0 flex-1">
-        <Nav />
-        <main className="min-w-0 flex-1 overflow-y-auto p-6">
-          {phase === 'error' && (
-            <div className="mb-4 rounded-xl bg-brand-50 px-4 py-3 text-sm text-brand ring-1 ring-brand-100">Simulation failed: {error}</div>
-          )}
-          <div key={tab} className="animate-fade-in">
-            {tab === 'simulation' && <SimulationTab />}
-            {tab === 'comparison' && <ComparisonTab />}
-            {tab === 'decisions' && <DecisionsTab />}
-            {tab === 'fan' && <FanTab />}
-            {tab === 'settings' && <SettingsTab />}
-          </div>
-        </main>
-      </div>
+      <main className="mx-auto max-w-[1440px] px-8 pt-8 pb-24">
+        {phase === 'error' && <div className="mb-4 rounded-2xl bg-brand-50 px-4 py-3 text-sm text-brand">Simulation failed: {error}</div>}
+        <div key={tab} className="animate-fade-in">
+          {tab === 'simulation' && <SimulationTab />}
+          {tab === 'comparison' && <ComparisonTab />}
+          {tab === 'decisions' && <DecisionsTab />}
+          {tab === 'fan' && <FanTab />}
+          {tab === 'settings' && <SettingsTab />}
+        </div>
+        <p className="mt-10 text-center text-[11px] text-ink-3">Simulation with assumed parameters for demonstration purposes · Map data © OpenStreetMap contributors</p>
+      </main>
       <ChatWidget />
       <PitchMode />
     </div>

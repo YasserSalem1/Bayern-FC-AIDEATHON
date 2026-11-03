@@ -9,7 +9,7 @@ import {
   cloneConfig,
 } from '../../sim/config';
 import { useStore } from '../../store';
-import { AssumptionBadge, Button, Card, CardHeader } from '../ui';
+import { AssumptionBadge, Button, Card, CardHeader, PageTitle } from '../ui';
 
 type Field = { path: string; label: string; unit?: string; step?: number; min?: number; max?: number; pct?: boolean };
 
@@ -51,7 +51,6 @@ const GROUPS: { title: string; subtitle?: string; fields: Field[] }[] = [
   },
   {
     title: 'Shuttle buses',
-    subtitle: 'Today shuttles are often underused.',
     fields: [
       { path: 'shuttle.buses', label: 'Buses', step: 1, min: 0 },
       { path: 'shuttle.seatsPerBus', label: 'Seats per bus', step: 5, min: 10 },
@@ -123,31 +122,27 @@ export function SettingsTab() {
     });
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-end justify-between">
-        <div>
-          <h2 className="text-xl font-bold text-slate-900">Settings & assumptions</h2>
-          <p className="text-sm text-slate-500">Every value below is an assumption and can be changed. All three scenarios re-run on the same seed.</p>
-        </div>
-        <div className="flex gap-2">
-          <Button onClick={() => setDraft(cloneConfig(DEFAULT_CONFIG))}>Reset to defaults</Button>
-          <Button variant="primary" disabled={!dirty || (phase !== 'ready' && phase !== 'error')} onClick={() => void apply(cloneConfig(draft))}>
-            Apply & re-run
-          </Button>
-        </div>
-      </div>
-      <div className="rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-900 ring-1 ring-amber-200">
-        <b>Simulation with assumed parameters for demonstration purposes.</b> Venue geometry comes from OpenStreetMap; capacities, behaviour and acceptance rates
-        are illustrative assumptions, not official figures.
-      </div>
+    <div className="flex flex-col gap-6">
+      <PageTitle
+        title="Settings"
+        subtitle="All values are assumptions for demonstration purposes."
+        right={
+          <div className="flex gap-2">
+            <Button onClick={() => setDraft(cloneConfig(DEFAULT_CONFIG))}>Reset</Button>
+            <Button variant="primary" disabled={!dirty || (phase !== 'ready' && phase !== 'error')} onClick={() => void apply(cloneConfig(draft))}>
+              Apply
+            </Button>
+          </div>
+        }
+      />
 
       <Card>
-        <CardHeader title="Match context" subtitle="Shifts the natural leaving curve: fans linger after a win, hurry in rain or cold." right={<AssumptionBadge />} />
+        <CardHeader title="Match context" right={<AssumptionBadge />} />
         <div className="grid grid-cols-3 gap-4 px-5 pb-5">
           <label className="text-sm">
-            <span className="mb-1 block text-xs font-medium text-slate-500">Result</span>
+            <span className="mb-1 block text-xs text-ink-3">Result</span>
             <select
-              className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5"
+              className="w-full rounded-xl bg-canvas px-3 py-1.5 outline-none focus:ring-2 focus:ring-brand/25"
               value={draft.match.result}
               onChange={(e) => update((c) => (c.match.result = e.target.value as SimConfig['match']['result']))}
             >
@@ -157,18 +152,18 @@ export function SettingsTab() {
             </select>
           </label>
           <label className="text-sm">
-            <span className="mb-1 block text-xs font-medium text-slate-500">Kick-off</span>
+            <span className="mb-1 block text-xs text-ink-3">Kick-off</span>
             <input
               type="time"
-              className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5"
+              className="w-full rounded-xl bg-canvas px-3 py-1.5 outline-none focus:ring-2 focus:ring-brand/25"
               value={draft.match.kickoff}
               onChange={(e) => update((c) => (c.match.kickoff = e.target.value || '20:30'))}
             />
           </label>
           <label className="text-sm">
-            <span className="mb-1 block text-xs font-medium text-slate-500">Weather</span>
+            <span className="mb-1 block text-xs text-ink-3">Weather</span>
             <select
-              className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5"
+              className="w-full rounded-xl bg-canvas px-3 py-1.5 outline-none focus:ring-2 focus:ring-brand/25"
               value={draft.match.weather}
               onChange={(e) => update((c) => (c.match.weather = e.target.value as SimConfig['match']['weather']))}
             >
@@ -190,7 +185,7 @@ export function SettingsTab() {
                 const shown = f.pct ? Math.round(raw * 100) : raw;
                 return (
                   <label key={f.path} className="text-sm">
-                    <span className="mb-1 flex items-center justify-between gap-2 text-xs font-medium text-slate-500">
+                    <span className="mb-1 flex items-center justify-between gap-2 text-xs font-medium text-ink-3">
                       {f.label}
                       {f.path !== 'seed' && <AssumptionBadge />}
                     </span>
@@ -206,9 +201,9 @@ export function SettingsTab() {
                           if (!Number.isFinite(v)) return;
                           update((c) => setPath(c, f.path, f.pct ? v / 100 : v));
                         }}
-                        className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 tabular-nums"
+                        className="w-full rounded-xl bg-canvas px-3 py-1.5 outline-none focus:ring-2 focus:ring-brand/25 tabular-nums"
                       />
-                      <span className="w-14 shrink-0 text-xs text-slate-400">{f.pct ? '%' : f.unit}</span>
+                      <span className="w-14 shrink-0 text-xs text-ink-3">{f.pct ? '%' : f.unit}</span>
                     </span>
                   </label>
                 );
@@ -219,11 +214,11 @@ export function SettingsTab() {
       </div>
 
       <Card>
-        <CardHeader title="Fan segments" subtitle="Acceptance = probability that a fan who sees the advice follows it, per incentive offered." right={<AssumptionBadge />} />
+        <CardHeader title="Fan segments" subtitle="Share who follow the advice, per reward" right={<AssumptionBadge />} />
         <div className="overflow-x-auto px-5 pb-5">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-[11px] tracking-wide text-slate-500 uppercase">
+              <tr className="text-left text-xs text-ink-3">
                 <th className="py-2 font-medium">Segment</th>
                 {INCENTIVES.map((i) => (
                   <th key={i} className="py-2 font-medium">
@@ -237,8 +232,8 @@ export function SettingsTab() {
             </thead>
             <tbody>
               {SEGMENTS.filter((s) => s !== 'away').map((s) => (
-                <tr key={s} className="border-t border-slate-100">
-                  <td className="py-2 pr-3 font-medium text-slate-700">{SEGMENT_LABEL[s]}</td>
+                <tr key={s} className="border-t border-black/5">
+                  <td className="py-2 pr-3 font-medium text-ink-2">{SEGMENT_LABEL[s]}</td>
                   {INCENTIVES.map((i) => (
                     <td key={i} className="py-1.5 pr-3">
                       <PctInput value={draft.segments[s].acceptance[i]} onChange={(v) => update((c) => (c.segments[s].acceptance[i] = v))} />
@@ -257,16 +252,15 @@ export function SettingsTab() {
                       min={0}
                       value={draft.segments[s].waitAversion}
                       onChange={(e) => update((c) => (c.segments[s].waitAversion = Number(e.target.value)))}
-                      className="w-20 rounded-lg border border-slate-200 bg-white px-2 py-1 tabular-nums"
+                      className="w-20 rounded-lg bg-canvas px-2 py-1 outline-none tabular-nums"
                     />
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <p className="mt-3 text-xs text-slate-500">
-            Away fans (blocks N3, N4 in the Nordkurve) always use the fixed Esplanade Süd lane and are never re-routed. Block segment mixes are defined in{' '}
-            <code className="rounded bg-slate-100 px-1">src/sim/config.ts</code>.
+          <p className="mt-3 text-xs text-ink-3">
+            Away fans (N3, N4) keep their fixed route.
           </p>
         </div>
       </Card>
@@ -284,9 +278,9 @@ function PctInput({ value, onChange }: { value: number; onChange: (v: number) =>
         step={1}
         value={Math.round(value * 100)}
         onChange={(e) => onChange(Math.max(0, Math.min(100, Number(e.target.value))) / 100)}
-        className="w-16 rounded-lg border border-slate-200 bg-white px-2 py-1 tabular-nums"
+        className="w-16 rounded-lg bg-canvas px-2 py-1 outline-none tabular-nums"
       />
-      <span className="text-xs text-slate-400">%</span>
+      <span className="text-xs text-ink-3">%</span>
     </span>
   );
 }

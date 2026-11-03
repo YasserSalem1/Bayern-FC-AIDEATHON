@@ -8,7 +8,10 @@ export function Timeline() {
   const whistle = whistleClockMin(config);
   const H = config.horizonMin;
   return (
-    <div className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm" data-pitch="timeline">
+    <div
+      className="flex items-center gap-5 rounded-full bg-white/80 py-2.5 pr-5 pl-2.5 shadow-[0_1px_2px_rgba(0,0,0,0.03),0_8px_28px_rgba(0,0,0,0.06)] backdrop-blur-xl"
+      data-pitch="timeline"
+    >
       <button
         type="button"
         disabled={!results}
@@ -16,7 +19,7 @@ export function Timeline() {
           if (t >= H) setT(0);
           set({ playing: !playing });
         }}
-        className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand text-white shadow-sm transition-colors hover:bg-brand-dark disabled:opacity-40"
+        className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink text-white transition-transform hover:scale-105 active:scale-95 disabled:opacity-30"
         aria-label={playing ? 'Pause' : 'Play'}
       >
         {playing ? (
@@ -25,9 +28,9 @@ export function Timeline() {
           <svg viewBox="0 0 24 24" className="ml-0.5 h-4 w-4" fill="currentColor"><path d="M7 5v14l12-7z" /></svg>
         )}
       </button>
-      <div className="w-28 shrink-0">
-        <div className="text-xl font-bold text-slate-900 tabular-nums">{formatClock(whistle + t)}</div>
-        <div className="text-[11px] text-slate-500 tabular-nums">+{Math.floor(t)} min after whistle</div>
+      <div className="w-24 shrink-0 leading-tight">
+        <div className="text-lg font-semibold tabular-nums">{formatClock(whistle + t)}</div>
+        <div className="text-[11px] text-ink-3 tabular-nums">+{Math.floor(t)} min</div>
       </div>
       <input
         type="range"
@@ -39,15 +42,10 @@ export function Timeline() {
           set({ playing: false });
           setT(Number(e.target.value));
         }}
-        className="h-1.5 flex-1 cursor-pointer"
+        className="h-1 flex-1 cursor-pointer outline-none"
         aria-label="Timeline"
       />
-      <Segmented
-        size="sm"
-        value={speed}
-        onChange={(v) => set({ speed: v })}
-        options={[1, 5, 20].map((v) => ({ value: v, label: `${v}×` }))}
-      />
+      <Segmented size="sm" value={speed} onChange={(v) => set({ speed: v })} options={[1, 5, 20].map((v) => ({ value: v, label: `${v}×` }))} />
     </div>
   );
 }

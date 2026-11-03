@@ -18,53 +18,45 @@ interface PitchStep {
 
 const STEPS: PitchStep[] = [
   {
-    title: '1 · The problem',
+    title: 'Everyone leaves at once',
     target: 'panel-left',
     tab: 'simulation',
     left: 'none',
     right: 'ai',
     play: { from: 0, speed: 20 },
     caption: (r) =>
-      `At the final whistle 75,024 fans leave at once. Almost everyone heads down the Esplanade to one U6 station: the queue peaks at ${fmt(
-        r.none.summary.peakU6Queue,
-      )} people, and the station approach is above safe density for ${r.none.summary.minutesAboveSafe} minutes.`,
+      `75,024 fans, one U6 station. Queue peaks at ${fmt(r.none.summary.peakU6Queue)} — unsafe for ${r.none.summary.minutesAboveSafe} minutes.`,
   },
   {
-    title: '2 · Same tip for all makes it worse',
+    title: 'Same tip for all backfires',
     target: 'chart-shuttle',
     tab: 'comparison',
     caption: (r) =>
-      `An app that gives everyone the same "fastest route" tip sees an empty bus stop and sends every user there. ${fmt(r.naive.summary.routeStats.shuttle.users)} fans herd to the shuttle – it becomes the slowest route (${fmt(
-        r.naive.summary.routeStats.shuttle.avgTimeToHome,
-      )} min to home on average, worst wait ${fmt(r.naive.summary.worstWait)} min).`,
+      `${fmt(r.naive.summary.routeStats.shuttle.users)} fans get the same tip and herd to the shuttle. Worst wait: ${fmt(r.naive.summary.worstWait)} minutes.`,
   },
   {
-    title: '3 · AI exit waves',
+    title: 'AI exit waves',
     target: 'panel-right',
     tab: 'simulation',
     left: 'none',
     right: 'ai',
     play: { from: 0, speed: 20 },
     caption: (r) =>
-      `Instead, every block gets its own exit wave and route that keeps queues under capacity. Same fans, same seed: peak platform queue ${fmt(
-        pctChange(r.none.summary.peakU6Queue, r.ai.summary.peakU6Queue),
-      )}%, average wait ${fmt(pctChange(r.none.summary.avgWait, r.ai.summary.avgWait))}%, unsafe minutes ${r.none.summary.minutesAboveSafe} → ${r.ai.summary.minutesAboveSafe} – even though only ${fmt(
-        r.ai.summary.compliance * 100,
-      )}% of fans follow the advice.`,
+      `Each block gets its own time and route. Queue ${fmt(pctChange(r.none.summary.peakU6Queue, r.ai.summary.peakU6Queue))}%, wait ${fmt(
+        pctChange(r.none.summary.avgWait, r.ai.summary.avgWait),
+      )}%, unsafe minutes ${r.ai.summary.minutesAboveSafe}.`,
   },
   {
-    title: '4 · How Gemini decides',
+    title: 'How Gemini decides',
     target: 'decision-trace',
     tab: 'decisions',
-    caption: () =>
-      'Every decision is traceable: inputs → optimizer wave & route → Gemini picks the incentive that fits the fan mix (café points for families, ticket-lottery entries for fan clubs), explains why, and writes the message. A validator checks it against the reward budget.',
+    caption: () => 'The optimizer sets the wave. Gemini picks the reward and writes the message. Every step is traceable.',
   },
   {
-    title: '5 · What the fan sees',
+    title: 'What the fan sees',
     target: 'phone',
     tab: 'fan',
-    caption: () =>
-      'Each fan gets a personal message, a countdown to their wave, an honest comparison of home times, a reward for waiting – and can ask the stadium anything. Mia san mia. Nur ned alle auf oamal.',
+    caption: () => 'A personal message, a countdown, a reward — and a stadium you can ask anything.',
   },
 ];
 
@@ -128,42 +120,42 @@ export function PitchMode() {
     <div className="pointer-events-none fixed inset-0 z-50">
       {rect && (
         <div
-          className="absolute rounded-2xl ring-4 ring-brand transition-all duration-300"
+          className="absolute rounded-[26px] ring-2 ring-white/90 transition-all duration-300"
           style={{
             left: rect.left - pad,
             top: rect.top - pad,
             width: rect.width + pad * 2,
             height: rect.height + pad * 2,
-            boxShadow: '0 0 0 9999px rgba(15, 23, 42, 0.45)',
+            boxShadow: '0 0 0 9999px rgba(0, 0, 0, 0.42)',
           }}
         />
       )}
       <div
-        className={`pointer-events-auto absolute ${captionTop ? 'top-20' : 'bottom-6'} left-1/2 w-[720px] max-w-[calc(100vw-48px)] -translate-x-1/2 rounded-2xl bg-white p-5 shadow-2xl ring-1 ring-slate-200`}
+        className={`pointer-events-auto absolute ${captionTop ? 'top-20' : 'bottom-6'} left-1/2 w-[640px] max-w-[calc(100vw-48px)] -translate-x-1/2 rounded-[24px] bg-white/90 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl`}
       >
         <div className="flex items-center justify-between">
-          <div className="text-xs font-semibold tracking-wide text-brand uppercase">
-            Pitch mode · step {pitchStep + 1} of {STEPS.length}
+          <div className="text-xs font-medium text-ink-3 tabular-nums">
+            {pitchStep + 1} / {STEPS.length}
           </div>
           <div className="flex gap-1">
             {STEPS.map((_, i) => (
-              <span key={i} className={`h-1.5 w-6 rounded-full ${i <= pitchStep ? 'bg-brand' : 'bg-slate-200'}`} />
+              <span key={i} className={`h-1.5 rounded-full transition-all ${i === pitchStep ? 'w-6 bg-brand' : i < pitchStep ? 'w-1.5 bg-brand' : 'w-1.5 bg-fill'}`} />
             ))}
           </div>
         </div>
-        <h3 className="mt-1 text-lg font-bold text-slate-900">{step.title}</h3>
-        <p className="mt-1 text-sm leading-relaxed text-slate-700">{results ? step.caption(results) : 'Simulation is still running…'}</p>
+        <h3 className="mt-1 text-[22px] font-semibold tracking-tight text-ink">{step.title}</h3>
+        <p className="mt-1 text-[15px] leading-relaxed text-ink-2">{results ? step.caption(results) : 'Simulation is still running…'}</p>
         <div className="mt-4 flex items-center justify-between">
           <Button variant="ghost" onClick={() => set({ pitchStep: null, playing: false })}>
-            Exit (Esc)
+            Exit
           </Button>
           <div className="flex gap-2">
             <Button disabled={pitchStep === 0} onClick={() => set({ pitchStep: pitchStep - 1 })}>
-              ← Back
+              Back
             </Button>
             {pitchStep < STEPS.length - 1 ? (
               <Button variant="primary" onClick={() => set({ pitchStep: pitchStep + 1 })}>
-                Next →
+                Next
               </Button>
             ) : (
               <Button variant="primary" onClick={() => set({ pitchStep: null, playing: false })}>

@@ -305,7 +305,7 @@ function label(
 
 // ------------------------------------------------------------- background
 
-export function drawBackground(ctx: CanvasRenderingContext2D, c: SimConfig, blockIds: string[], awayIdx: Set<number>) {
+export function drawBackground(ctx: CanvasRenderingContext2D, _c: SimConfig, blockIds: string[], awayIdx: Set<number>) {
   const L = G.layers;
   const base = ctx.getTransform();
   ctx.fillStyle = '#F4F5F2';
@@ -425,7 +425,7 @@ export function drawBackground(ctx: CanvasRenderingContext2D, c: SimConfig, bloc
     const [x, y] = ring(GATE_ANGLE[s]);
     label(ctx, text, x + dx, y + dy, 9.5, COLORS.ink, align, 600);
   };
-  gl('N', 'Eingang Nord (away)', 6, -6, 'left');
+  gl('N', 'Nord', 6, -6, 'left');
   gl('O', 'Ost', 7, 3, 'left');
   gl('W', 'West', -7, 3, 'right');
   gl('S', 'Süd', 8, 2, 'left');
@@ -445,26 +445,15 @@ export function drawBackground(ctx: CanvasRenderingContext2D, c: SimConfig, bloc
 
   // Labels.
   label(ctx, 'Allianz Arena', CENTER[0] + HALF[0] + 14, CENTER[1] - HALF[1] + 4, 13, COLORS.ink, 'left', 800);
-  label(ctx, '75,024 seats', CENTER[0] + HALF[0] + 14, CENTER[1] - HALF[1] + 18, 10.5, COLORS.muted);
   const st: P = [(PLATFORM_BOX.x0 + PLATFORM_BOX.x1) / 2, (PLATFORM_BOX.y0 + PLATFORM_BOX.y1) / 2];
   const at = (dx: number, dy: number) => screenAt(st, dx, dy);
   label(ctx, 'Fröttmaning', ...at(-6, -58), 13, COLORS.ink, 'center', 800);
-  label(ctx, `U6 · every ${c.u6.trainHeadwayMin} min · ${c.u6.trainCapacity} per train`, ...at(-6, -45), 10, COLORS.muted, 'center');
   label(ctx, 'Esplanade', 594, 470, 12, '#57534E', 'center', 700, deg(-72));
-  label(ctx, 'Esplanade Süd (away lane)', 492, 470, 9.5, '#6366F1', 'center', 600, deg(-72));
-  label(ctx, 'bridge & stairs', 410, 622, 10, COLORS.muted, 'center', 600);
-  label(ctx, 'Parking garage (9,800 spaces)', ...screenAt(GARAGE[1], 18, 34), 10.5, COLORS.ink, 'left', 700);
-  label(ctx, 'four storeys under the Esplanade', ...screenAt(GARAGE[1], 18, 47), 10, COLORS.muted);
-  label(ctx, 'Busparkplatz Mitte', 580, 84, 11, COLORS.ink, 'right', 700);
-  label(ctx, `shuttles · ${c.shuttle.buses} × ${c.shuttle.seatsPerBus} seats`, 580, 97, 10, COLORS.muted, 'right');
-  label(ctx, 'Gästeparkhaus', 488, 50, 10, COLORS.muted, 'right', 600);
-  label(ctx, 'P+R', G.named.parkRide[0][0] + 6, G.named.parkRide[0][1] + 30, 10, COLORS.muted, 'left', 700);
-  label(ctx, 'Bus Süd', 486, 662, 10, COLORS.muted, 'center', 600);
+  label(ctx, 'Away lane', 492, 470, 9.5, '#6366F1', 'center', 600, deg(-72));
+  label(ctx, 'Garage', ...screenAt(GARAGE[1], 18, 34), 10.5, COLORS.ink, 'left', 700);
+  label(ctx, 'Shuttles', 580, 84, 11, COLORS.ink, 'right', 700);
   label(ctx, 'A9', 742, 300, 12, '#475569', 'center', 800);
   label(ctx, 'A99', 840, 150, 12, '#475569', 'center', 800);
-  label(ctx, 'U-Bahn depot', 445, 300, 10, COLORS.muted, 'center', 600, deg(-70));
-  label(ctx, 'Fröttmaninger Heide', 150, 210, 11, '#4D7C0F', 'center', 600);
-  label(ctx, 'Werner-Heisenberg-Allee', 690, 300, 9, COLORS.muted, 'center', 500, deg(-70));
 
   // Screen-space overlays: north arrow, 200 m scale bar, attribution.
   ctx.setTransform(base);
@@ -538,7 +527,7 @@ export function drawFrame(
     path(ctx, GARAGE, true);
     ctx.fill();
     ctx.globalAlpha = 1;
-    label(ctx, `${Math.round(carQ).toLocaleString('en-US')} waiting to drive out`, ...screenAt(GARAGE[1], 18, 60), 10, '#334155', 'left', 600);
+    label(ctx, `${Math.round(carQ).toLocaleString('en-US')} cars queuing`, ...screenAt(GARAGE[1], 18, 47), 10, '#334155', 'left', 600);
   }
 
   // Train at the platform, departing south towards the city.

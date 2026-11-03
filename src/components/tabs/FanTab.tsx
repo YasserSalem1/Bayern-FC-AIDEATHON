@@ -3,7 +3,7 @@ import { incentivePoints } from '../../sim/incentives';
 import { estimateTrip, naturalRoute } from '../../sim/estimates';
 import { useStore } from '../../store';
 import { Chat, useChatState } from '../Chat';
-import { Card, CardHeader, SourceBadge } from '../ui';
+import { Card, PageTitle, SourceBadge } from '../ui';
 
 function Countdown({ waveMin }: { waveMin: number }) {
   const t = useStore((s) => Math.floor(s.t * 6) / 6);
@@ -107,41 +107,44 @@ function Phone() {
 }
 
 export function FanTab() {
-  const { plan, fanBlock, set } = useStore();
+  const { plan, fanBlock, set, decisions } = useStore();
   const state = useChatState();
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-end justify-between">
-        <div>
-          <h2 className="text-xl font-bold text-slate-900">What the fan sees</h2>
-          <p className="text-sm text-slate-500">Personal message, countdown and reward come from the AI scenario on the shared timeline.</p>
-        </div>
-        <label className="flex items-center gap-2 text-sm text-slate-600">
-          Fan in block
-          <select
-            value={fanBlock}
-            onChange={(e) => set({ fanBlock: e.target.value, chat: [] })}
-            className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-sm"
-          >
-            {plan?.blocks.map((b) => (
-              <option key={b.blockId} value={b.blockId}>
-                {b.blockId}
-                {b.isAway ? ' (away)' : ` · wave +${b.waveMin}`}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <div className="flex items-start justify-center gap-8">
+    <div className="flex flex-col gap-6">
+      <PageTitle
+        title="Fan App"
+        subtitle="What one fan sees, live on the shared timeline."
+        right={
+          <div className="flex items-center gap-3">
+            <SourceBadge source={fanBlock ? decisions?.[fanBlock]?.source : undefined} />
+            <select
+              value={fanBlock}
+              onChange={(e) => set({ fanBlock: e.target.value, chat: [] })}
+              className="rounded-full bg-fill px-3.5 py-1.5 text-[13px] font-medium outline-none"
+              aria-label="Fan block"
+            >
+              {plan?.blocks.map((b) => (
+                <option key={b.blockId} value={b.blockId}>
+                  Block {b.blockId}
+                  {b.isAway ? ' (away)' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+        }
+      />
+      <div className="flex items-start justify-center gap-10">
         <Phone />
-        <Card className="w-[420px]">
-          <CardHeader
-            title="What Gemini sees for the chat"
-            subtitle="The assistant may only quote numbers from this state (exit questions). General questions are answered without inventing facts."
-          />
-          <pre className="mx-5 mb-5 max-h-[640px] overflow-auto rounded-xl bg-slate-900 p-4 text-[11px] leading-relaxed text-slate-100">
-            {state ? JSON.stringify(state, null, 2) : '…'}
-          </pre>
+        <Card className="w-[380px]">
+          <details>
+            <summary className="cursor-pointer px-6 py-5 text-[15px] font-semibold select-none">
+              Gemini context
+              <span className="ml-2 text-xs font-normal text-ink-3">the only numbers the chat may use</span>
+            </summary>
+            <pre className="mx-5 mb-5 max-h-[600px] overflow-auto rounded-2xl bg-canvas p-4 text-[11px] leading-relaxed text-ink-2">
+              {state ? JSON.stringify(state, null, 2) : '…'}
+            </pre>
+          </details>
         </Card>
       </div>
     </div>
