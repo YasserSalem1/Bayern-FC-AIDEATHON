@@ -52,12 +52,6 @@ const STEPS: PitchStep[] = [
     tab: 'decisions',
     caption: () => 'The optimizer sets the wave. Gemini picks the reward and writes the message. Every step is traceable.',
   },
-  {
-    title: 'What the fan sees',
-    target: 'phone',
-    tab: 'fan',
-    caption: () => 'A personal message, a countdown, a reward — and a stadium you can ask anything.',
-  },
 ];
 
 export function PitchMode() {

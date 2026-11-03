@@ -4,7 +4,6 @@ import { Header } from './components/Header';
 import { PitchMode } from './components/PitchMode';
 import { ComparisonTab } from './components/tabs/ComparisonTab';
 import { DecisionsTab } from './components/tabs/DecisionsTab';
-import { FanTab } from './components/tabs/FanTab';
 import { SettingsTab } from './components/tabs/SettingsTab';
 import { SimulationTab } from './components/tabs/SimulationTab';
 import { useStore } from './store';
@@ -49,7 +48,6 @@ export default function App() {
           {tab === 'simulation' && <SimulationTab />}
           {tab === 'comparison' && <ComparisonTab />}
           {tab === 'decisions' && <DecisionsTab />}
-          {tab === 'fan' && <FanTab />}
           {tab === 'settings' && <SettingsTab />}
         </div>
         <p className="mt-10 text-center text-[11px] text-ink-3">Simulation with assumed parameters for demonstration purposes · Map data © OpenStreetMap contributors</p>
